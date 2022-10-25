@@ -9,26 +9,25 @@ const TriviaCardList = () => {
     const { triviaGameId } = useParams();
     const [triviaCards, setTriviaCards] = useState([]);
 
-    const getTriviaCards = (id) => {
-        GetByTriviaGame(id).then((triviaCards) => {
+    const getTriviaCards = () => {
+        GetByTriviaGame(triviaGameId).then((triviaCards) => {
             setTriviaCards(triviaCards);
         });
     };
 
     useEffect(() => {
-        getTriviaCards(triviaGameId);
+        getTriviaCards();
     }, []);
 
     return (
         <div className="container">
             <div className="row justify-content-center">
 
-                {triviaCards.map((triviaCard) => (
+                {triviaCards?.map((triviaCard) => (
                     <TriviaCard triviaCard={triviaCard} key={triviaCard.id} update={getTriviaCards} />
                 ))}
             </div>
         </div>
-
     );
 };
 export default TriviaCardList;

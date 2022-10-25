@@ -1,8 +1,8 @@
 import React, { useEffect, useInsertionEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardBody } from "reactstrap";
+import { Button, Card, CardBody, NavItem } from "reactstrap";
 import { getTriviaGameById } from "../../modules/triviaGameManager";
-
+import { NavLink as RRNavLink } from "react-router-dom";
 
 const TriviaGameDetails = () => {
     const { triviaGameId } = useParams();
@@ -32,7 +32,12 @@ const TriviaGameDetails = () => {
                     </div>
                 </div>
             </CardBody>
+            <NavItem className="addcardContainer">
+                <div className="addcarContainer">Create New Trivia Card</div>
+                <Button id="createButton" tag={RRNavLink} to="/TriviaCard/CreateTriviaCard">Create Trivia Card</Button>
+            </NavItem>
         </Card>
+
     );
 };
 export default TriviaGameDetails;

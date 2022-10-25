@@ -17,3 +17,13 @@ export const deleteTriviaGame = (Id) => {
         method: "DELETE",
     });
 };
+
+export const addTriviaGame = (triviaGame) => {
+    return fetch(api, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(triviaGame),
+    });
+};

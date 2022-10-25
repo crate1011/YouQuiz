@@ -87,6 +87,31 @@ namespace YouQuiz.Repositories
                     cmd.Parameters.AddWithValue("@UserProfileId", triviaGame.UserProfileId);
 
                     triviaGame.Id = (int)cmd.ExecuteScalar();
+
+                    AddTriviaGameCategory(triviaGame.Id, triviaGame.Category);
+                }
+            }
+        }
+
+        private void AddTriviaGameCategory(int triviaGameId, List<Category> categories)
+        {
+            foreach (var category in categories)
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                        INSERT INTO TriviaGameCategory ( CategoryId, TriviaGameId )
+                        OUTPUT INSERTED.ID
+                        VALUES ( @Category, @TriviaGameId )";
+
+                        cmd.Parameters.AddWithValue("@CategoryId", category.Id);
+                        cmd.Parameters.AddWithValue("@TriviaGameId", triviaGameId);
+
+                        triviaGameId = (int)cmd.ExecuteScalar();
+                    }
                 }
             }
         }

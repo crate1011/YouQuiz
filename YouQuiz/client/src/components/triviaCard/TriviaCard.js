@@ -4,14 +4,16 @@ import { NavLink as RRNavLink } from "react-router-dom"
 import { deleteTriviaCard } from "../../modules/TriviaCardManager";
 
 
-const TriviaCard = ({ triviaCard, update, }) => {
+const TriviaCard = ({ triviaCard, update }) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
     const deleteButton = (id) => {
         deleteTriviaCard(id)
-            .then(toggle)
-            .then(update)
+            .then(() => {
+                toggle()
+                update()
+            })
     }
 
     return (
@@ -39,7 +41,7 @@ const TriviaCard = ({ triviaCard, update, }) => {
                             className="deleteButton">DELETE</button>
                     </div>
                 </section>
-                <Modal isOpen={modal} toggle={toggle} {...triviaCard}>
+                <Modal isOpen={modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>Delete Card</ModalHeader>
                     <ModalBody>
                         <>

@@ -149,6 +149,7 @@ namespace YouQuiz.Repositories
             }
         }
 
+
         public void Update(UserProfile userProfile)
         {
             using (var conn = Connection)
