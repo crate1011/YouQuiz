@@ -98,7 +98,7 @@ namespace YouQuiz.Repositories
                                WrongAnswerOne = @WrongAnswerOne,
                                WrongAnswerTwo = @WrongAnswerTwo,
                                WrongAnswerThree = @WrongAnswerThree,
-                               Answer = @Answer
+                               Answer = @Answer,
                                TriviaGameId = @TriviaGameId
                          WHERE Id = @Id";
 
@@ -111,6 +111,43 @@ namespace YouQuiz.Repositories
                     DbUtils.AddParameter(cmd, "@TriviaGameId", triviaCard.TriviaGameId);
 
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public TriviaCard GetCardById(int Id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, Question, WrongAnswerOne, WrongAnswerTwo, WrongAnswerThree, Answer, TriviaGameId
+                          FROM TriviaCard
+                         WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", Id);
+
+                    TriviaCard triviaCard = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        triviaCard = new TriviaCard()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Question = DbUtils.GetString(reader, "Question"),
+                            WrongAnswerOne = DbUtils.GetString(reader, "WrongAnswerOne"),
+                            WrongAnswerTwo = DbUtils.GetString(reader, "WrongAnswerTwo"),
+                            WrongAnswerThree = DbUtils.GetString(reader, "WrongAnswerThree"),
+                            Answer = DbUtils.GetString(reader, "Answer"),
+                            TriviaGameId = DbUtils.GetInt(reader, "TriviaGameId"),
+                        };
+                    }
+                    reader.Close();
+
+                    return triviaCard;
                 }
             }
         }

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button, Card, CardBody, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { NavLink as RRNavLink } from "react-router-dom"
+import { NavLink as RRNavLink, useNavigate } from "react-router-dom"
 import { deleteTriviaCard } from "../../modules/TriviaCardManager";
 
 
 const TriviaCard = ({ triviaCard, update }) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const navigate = useNavigate()
 
     const deleteButton = (id) => {
         deleteTriviaCard(id)
@@ -36,7 +37,9 @@ const TriviaCard = ({ triviaCard, update }) => {
                         <span className="tagName">Correct Answer: {triviaCard.answer}</span>
                     </div>
                     <div className="buttonContainer">
-                        <Button id="editButton" tag={RRNavLink} to='/triviaCard/edit'>EDIT</Button>
+                        <button className="btn btn-warning" onClick={() => { navigate(`/TriviaCard/GetByTriviaGame/${triviaCard.id}`) }}>
+                            edit
+                        </button>
                         <button outline onClick={toggle}
                             className="deleteButton">DELETE</button>
                     </div>

@@ -31,7 +31,7 @@ const TriviaGame = ({ triviaGame, update, }) => {
                             className="deleteButton">DELETE</button>
                     </div>
                 </section>
-                <Modal isOpen={modal} toggle={toggle} {...triviaGame}>
+                <Modal isOpen={modal} toggle={toggle} >
                     <ModalHeader toggle={toggle}>Delete Game</ModalHeader>
                     <ModalBody>
                         <>

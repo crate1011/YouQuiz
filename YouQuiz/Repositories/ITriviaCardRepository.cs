@@ -9,5 +9,6 @@ namespace YouQuiz.Repositories
         void DeleteTriviaCard(int id);
         List<TriviaCard> GetByTriviaGameId(int trivaGameId);
         void UpdateTriviaCard(TriviaCard triviaCard);
+        TriviaCard GetCardById(int Id);
     }
 }

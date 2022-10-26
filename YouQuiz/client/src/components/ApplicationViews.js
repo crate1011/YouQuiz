@@ -12,6 +12,7 @@ import TriviaGameByCategory from "./triviaGame/TriviaGameByCategory";
 import TriviaCardList from "./triviaCard/TriviaCardList";
 import { TriviaGameCreate } from "./triviaGame/TriviaGameCreate";
 import { CreateTriviaCard } from "./triviaCard/CreateTriviaCard";
+import { TriviaCardEdit } from "./triviaCard/TriviaCardEdit";
 
 
 
@@ -31,6 +32,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Route path="GetByCategory/:GameId" element={<TriviaGameByCategory />} />
                     <Route path="/TriviaGame/CreateTrivia" element={<TriviaGameCreate />} />
                     <Route path="/TriviaCard/CreateTriviaCard" element={<CreateTriviaCard />} />
+                    <Route path="/TriviaCard/GetByTriviaGame/:triviaCardId" element={<TriviaCardEdit />} />
 
 
 

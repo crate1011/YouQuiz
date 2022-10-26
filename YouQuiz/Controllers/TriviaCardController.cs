@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouQuiz.Models;
+
 using YouQuiz.Repositories;
 
 namespace YouQuiz.Controllers
@@ -45,6 +46,12 @@ namespace YouQuiz.Controllers
         public IActionResult GetByTriviaGame(int triviaGameId)
         {
             return Ok(_triviaCardRepository.GetByTriviaGameId(triviaGameId));
+        }
+
+        [HttpGet("{Id}")]
+        public IActionResult Get(int Id)
+        {
+            return Ok(_triviaCardRepository.GetCardById(Id));
         }
     }
 }

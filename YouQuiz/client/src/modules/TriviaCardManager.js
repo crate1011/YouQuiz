@@ -19,3 +19,17 @@ export const addTriviaCard = (triviaCard) => {
         body: JSON.stringify(triviaCard),
     });
 };
+
+export const editTriviaCard = (id, triviaCard) => {
+    return fetch(api + `/${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(triviaCard)
+    })
+}
+
+export const getByCardId = (Id) => {
+    return fetch(api + `/${Id}`).then((res) => res.json());
+};
