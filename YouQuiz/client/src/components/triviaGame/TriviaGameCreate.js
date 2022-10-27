@@ -1,40 +1,39 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Dropdown, Form, FormGroup, Input, Label } from "reactstrap"
+import { Form, FormGroup, Input, Label } from "reactstrap"
 import { addTriviaGame } from "../../modules/triviaGameManager"
 import { getAllCategories } from "../../modules/catManager"
 
-
-
-
 export const TriviaGameCreate = () => {
     const navigate = useNavigate()
-    const [triviaGame, update] = useState({
-        Name: "",
-        UserProfileId: "",
-        TriviaGameId: "",
-        CategoryId: ""
+    const [cats, setCats] = useState([]);
+    const [triviaGame, setTriviaGame] = useState({
+        name: "",
+        userProfileId: "",
+        categoryId: 0
     })
 
-    const [cats, setCats] = useState([]);
     const getCatsFromApi = () => {
         getAllCategories().then(ts => setCats(ts));
     }
-    getCatsFromApi()
+    useEffect(() => {
+        getCatsFromApi();
+    }, []);
+
     const handleCreateButtonClick = (event) => {
         event.preventDefault()
         const triviaGameToSendToApi = {
-            Name: triviaGame.Name,
-            UserProfileId: triviaGame.UserProfileId,
-            TriviaGameId: triviaGame.Id,
-            CategoryId: cats
+            name: triviaGame.name,
+            userProfileId: triviaGame.userProfileId,
+            categories: triviaGame.categoryId
         }
-        addTriviaGame(triviaGameToSendToApi).then(() => { navigate("/tags") })
+        addTriviaGame(triviaGameToSendToApi).then(() => { navigate(`/triviaGames`) })
     }
 
     return (
         <>
             <Form>
+                <div>Create A Game</div>
                 <img alt="" src="" width=""></img>
                 <FormGroup>
 
@@ -45,8 +44,8 @@ export const TriviaGameCreate = () => {
                             onChange={
                                 (evt) => {
                                     let copy = { ...triviaGame }
-                                    copy.Name = evt.target.value
-                                    update(copy)
+                                    copy.name = evt.target.value
+                                    setTriviaGame(copy)
                                 }
                             } />
                     </div>
@@ -57,8 +56,8 @@ export const TriviaGameCreate = () => {
                             onChange={
                                 (evt) => {
                                     let copy = { ...triviaGame }
-                                    copy.UserProfileId = evt.target.value
-                                    update(copy)
+                                    copy.userProfileId = parseInt(evt.target.value)
+                                    setTriviaGame(copy)
                                 }
                             } />
                     </div>
@@ -70,9 +69,9 @@ export const TriviaGameCreate = () => {
                         type="select"
                         onChange={
                             (evt) => {
-                                let copy = { ...cats }
-                                copy.id = evt.target.value
-                                update(copy)
+                                let copy = { ...triviaGame }
+                                copy.categoryId = parseInt(evt.target.value)
+                                setTriviaGame(copy)
                             }
                         }>
                         <option>Choose A Category</option>

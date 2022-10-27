@@ -12,6 +12,7 @@ namespace YouQuiz.Models
 
         public int UserProfileId { get; set; }
 
-        public List<Category> Category { get; set; }
+        public List<Category> Categories { get; set; }
+        public int CategoryId { get; set; }
     }
 }
