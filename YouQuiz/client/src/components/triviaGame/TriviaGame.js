@@ -26,7 +26,9 @@ const TriviaGame = ({ triviaGame, update, }) => {
                         <span className="tagName">{triviaGame.name}</span>
                     </div>
                     <div className="buttonContainer">
-                        <Button id="editButton" tag={RRNavLink} to='/triviaGame/edit'>EDIT</Button>
+                        <button className="btn btn-warning" onClick={() => { navigate(`/TriviaGame/Edit/${triviaGame.id}`) }}>
+                            edit
+                        </button>
                         <button outline onClick={toggle}
                             className="deleteButton">DELETE</button>
                     </div>

@@ -48,7 +48,7 @@ namespace YouQuiz.Repositories
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
                                     UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                                    Category = new List<Category>()
+                                    Categories = new List<Category>()
                                 };
 
                                 triviaGames.Add(existingTriviaGame);
@@ -56,7 +56,7 @@ namespace YouQuiz.Repositories
 
                             if (DbUtils.IsNotDbNull(reader, "CategoryId"))
                             {
-                                existingTriviaGame.Category.Add(new Category()
+                                existingTriviaGame.Categories.Add(new Category()
                                 {
                                     Id = DbUtils.GetInt(reader, "CategoryId"),
                                     Name = reader.GetString(reader.GetOrdinal("CategoryName"))
@@ -88,15 +88,13 @@ namespace YouQuiz.Repositories
 
                     triviaGame.Id = (int)cmd.ExecuteScalar();
 
-                    AddTriviaGameCategory(triviaGame.Id, triviaGame.Category);
+                    AddTriviaGameCategory(triviaGame.Id, triviaGame.CategoryId);
                 }
             }
         }
 
-        private void AddTriviaGameCategory(int triviaGameId, List<Category> categories)
+        private void AddTriviaGameCategory(int triviaGameId, int categoryId)
         {
-            foreach (var category in categories)
-            {
                 using (var conn = Connection)
                 {
                     conn.Open();
@@ -105,15 +103,14 @@ namespace YouQuiz.Repositories
                         cmd.CommandText = @"
                         INSERT INTO TriviaGameCategory ( CategoryId, TriviaGameId )
                         OUTPUT INSERTED.ID
-                        VALUES ( @Category, @TriviaGameId )";
+                        VALUES ( @CategoryId, @TriviaGameId )";
 
-                        cmd.Parameters.AddWithValue("@CategoryId", category.Id);
+                        cmd.Parameters.AddWithValue("@CategoryId", categoryId);
                         cmd.Parameters.AddWithValue("@TriviaGameId", triviaGameId);
 
                         triviaGameId = (int)cmd.ExecuteScalar();
                     }
                 }
-            }
         }
 
         public void DeleteTriviaGame(int triviaGameId)
@@ -141,7 +138,7 @@ namespace YouQuiz.Repositories
                     cmd.CommandText = @"
                         UPDATE TriviaGame
                            SET Name = @Name,
-                               UserProfileId = @UserProfileId,
+                               UserProfileId = @UserProfileId
                          WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Name", triviaGame.Name);
@@ -179,12 +176,12 @@ namespace YouQuiz.Repositories
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                            Category = new List<Category>()
+                            Categories = new List<Category>()
                         };
 
                         if (DbUtils.IsNotDbNull(reader, "CategoryId"))
                         {
-                            triviaGame.Category.Add(new Category()
+                            triviaGame.Categories.Add(new Category()
                             {
                                 Id = DbUtils.GetInt(reader, "CategoryId"),
                                 Name = reader.GetString(reader.GetOrdinal("CategoryName"))
@@ -231,7 +228,7 @@ namespace YouQuiz.Repositories
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
                                     UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                                    Category = new List<Category>()
+                                    Categories = new List<Category>()
                                 };
 
                                 triviaGames.Add(existingTriviaGame);
@@ -239,7 +236,7 @@ namespace YouQuiz.Repositories
 
                             if (DbUtils.IsNotDbNull(reader, "CategoryId"))
                             {
-                                existingTriviaGame.Category.Add(new Category()
+                                existingTriviaGame.Categories.Add(new Category()
                                 {
                                     Id = DbUtils.GetInt(reader, "CategoryId"),
                                     Name = reader.GetString(reader.GetOrdinal("CategoryName"))
