@@ -1,4 +1,4 @@
-import React, { useEffect, useInsertionEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
 import { getByCategoryId } from "../../modules/triviaGameManager";

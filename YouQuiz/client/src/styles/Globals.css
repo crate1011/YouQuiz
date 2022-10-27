@@ -1,6 +1,6 @@
 Button {
-    color: white;
-    background-color: #db534b !important;
+    color: rgb(0, 0, 0);
+    background-color: rgba(251, 202, 8, 0.969);
     border: none;
     margin: 2px;
 }
@@ -35,4 +35,8 @@ Button {
 .dot_logo {
     width: 90%;
     height: 90%;
+}
+
+.addCat {
+    width: 100px;
 }

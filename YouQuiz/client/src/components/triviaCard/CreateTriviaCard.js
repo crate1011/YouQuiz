@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Form, FormGroup } from "reactstrap"
 import { addTriviaCard } from "../../modules/TriviaCardManager"
 
@@ -26,7 +26,6 @@ export const CreateTriviaCard = () => {
         }
         addTriviaCard(cardToSendToApi).then(() => { navigate(`/TriviaGame/${triviaCard.TriviaGameId}`) })
     }
-
 
     return (
         <>

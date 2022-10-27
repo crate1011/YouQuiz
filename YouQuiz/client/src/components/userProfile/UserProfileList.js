@@ -1,4 +1,4 @@
-import React, { useEffect, useInsertionEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllUserProfiles } from "../../modules/UserProfileManager";
 import UserProfile from "./UserProfile";
 

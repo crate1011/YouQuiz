@@ -1,4 +1,4 @@
-import React, { useEffect, useInsertionEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, NavItem } from "reactstrap";
 import { getAllTriviaGames } from "../../modules/triviaGameManager";
 import TriviaGame from "./TriviaGame";

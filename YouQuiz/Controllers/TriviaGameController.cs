@@ -64,5 +64,12 @@ namespace YouQuiz.Controllers
         {
             return Ok(_trivRepository.GetByCategoryId(categoryId));
         }
+
+        [HttpPost("AddTriviaGameCategory")]
+        public IActionResult AddTriviaGameCategory(TriviaGameCategory triviaGameCategory)
+        {
+            _trivRepository.AddTriviaGameCategory(triviaGameCategory);
+            return CreatedAtAction("Get", new { id = triviaGameCategory.Id }, triviaGameCategory);
+        }
     }
 }

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Category from './Category'
-import { Button, NavItem } from "reactstrap";
-import { NavLink as RRNavLink } from "react-router-dom";
 import { getAllCategories } from "../../modules/catManager";
 
 export function CategoriesList() {
@@ -14,7 +12,7 @@ export function CategoriesList() {
     }, []);
 
     return (
-        <div className="container">
+        <div className="catcontainer">
             <div className="row justify-content-center">
                 <h1 className="catPageHeader">View Games By Category</h1>
                 {

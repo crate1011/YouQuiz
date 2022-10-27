@@ -11,5 +11,6 @@ namespace YouQuiz.Repositories
         void UpdateTriviaGame(TriviaGame triviaGame);
         TriviaGame GetTriviaGameById(int Id);
         List<TriviaGame> GetByCategoryId(int categoryId);
+        void AddTriviaGameCategory(TriviaGameCategory triviaGameCategory);
     }
 }

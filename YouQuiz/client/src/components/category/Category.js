@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Card, CardBody, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { NavLink as RRNavLink } from "react-router-dom"
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardBody } from "reactstrap";
+import "./category.css"
 
-
-
-const Category = ({ cat, update }) => {
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+const Category = ({ cat }) => {
     const navigate = useNavigate()
 
     return (
         <Card>
-            <CardBody id="tag-cardBody">
-                <section className="tagContainer">
-                    <div className="tagNameContainer">
-                        <span className="tagName">{cat.name}</span>
+            <CardBody id="cat-cardBody">
+                <section className="catContainer">
+                    <div className="catNameContainer">
+                        <span className="catName">{cat.name}</span>
                     </div>
                     <button className="btn btn-warning" onClick={() => { navigate(`/GetByCategory/${cat.id}`) }}>
                         View Games

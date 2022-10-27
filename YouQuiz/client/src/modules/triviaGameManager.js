@@ -37,3 +37,13 @@ export const editTriviaGame = (id, triviaGame) => {
         body: JSON.stringify(triviaGame)
     })
 }
+
+export const addTriviaGameCategory = (triviaGameCategory) => {
+    return fetch(api + `/AddTriviaGameCategory`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(triviaGameCategory),
+    });
+};

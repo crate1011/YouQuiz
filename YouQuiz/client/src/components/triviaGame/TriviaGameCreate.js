@@ -25,7 +25,7 @@ export const TriviaGameCreate = () => {
         const triviaGameToSendToApi = {
             name: triviaGame.name,
             userProfileId: triviaGame.userProfileId,
-            categories: triviaGame.categoryId
+            categoryId: triviaGame.categoryId
         }
         addTriviaGame(triviaGameToSendToApi).then(() => { navigate(`/triviaGames`) })
     }

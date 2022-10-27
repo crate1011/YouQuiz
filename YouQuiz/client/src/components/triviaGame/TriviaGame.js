@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, CardBody, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { NavLink as RRNavLink } from "react-router-dom"
 import { deleteTriviaGame } from "../../modules/triviaGameManager";
-
-
 
 const TriviaGame = ({ triviaGame, update, }) => {
     const [modal, setModal] = useState(false);

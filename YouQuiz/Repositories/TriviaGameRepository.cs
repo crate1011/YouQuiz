@@ -88,12 +88,11 @@ namespace YouQuiz.Repositories
 
                     triviaGame.Id = (int)cmd.ExecuteScalar();
 
-                    AddTriviaGameCategory(triviaGame.Id, triviaGame.CategoryId);
                 }
             }
         }
 
-        private void AddTriviaGameCategory(int triviaGameId, int categoryId)
+        public void AddTriviaGameCategory(TriviaGameCategory triviaGameCategory)
         {
                 using (var conn = Connection)
                 {
@@ -105,10 +104,10 @@ namespace YouQuiz.Repositories
                         OUTPUT INSERTED.ID
                         VALUES ( @CategoryId, @TriviaGameId )";
 
-                        cmd.Parameters.AddWithValue("@CategoryId", categoryId);
-                        cmd.Parameters.AddWithValue("@TriviaGameId", triviaGameId);
+                        cmd.Parameters.AddWithValue("@CategoryId", triviaGameCategory.CategoryId);
+                        cmd.Parameters.AddWithValue("@TriviaGameId", triviaGameCategory.TriviaGameId);
 
-                        triviaGameId = (int)cmd.ExecuteScalar();
+                        triviaGameCategory.Id = (int)cmd.ExecuteScalar();
                     }
                 }
         }
