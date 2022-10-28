@@ -248,5 +248,59 @@ namespace YouQuiz.Repositories
                 }
             }
         }
+
+        public List<TriviaGame> GetByUserId(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT tg.Id, tg.Name, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName
+                       FROM TriviaGame tg 
+                       LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
+                       LEFT JOIN Category c ON tgc.CategoryId = c.Id
+                       WHERE tg.UserProfileId = @UserProfileId";
+
+                    DbUtils.AddParameter(cmd, "@UserProfileId", userId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        var triviaGames = new List<TriviaGame>();
+                        while (reader.Read())
+                        {
+                            var triviaId = DbUtils.GetInt(reader, "Id");
+
+                            var existingTriviaGame = triviaGames.FirstOrDefault(p => p.Id == triviaId);
+                            if (existingTriviaGame == null)
+                            {
+                                existingTriviaGame = new TriviaGame()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                                    UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                    Categories = new List<Category>()
+                                };
+
+                                triviaGames.Add(existingTriviaGame);
+                            }
+
+                            if (DbUtils.IsNotDbNull(reader, "CategoryId"))
+                            {
+                                existingTriviaGame.Categories.Add(new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                                });
+                            }
+                        }
+
+                        return triviaGames;
+                    }
+                }
+            }
+        }
     }
 }

@@ -13,9 +13,10 @@ import { logout } from '../modules/authManager';
 import "../styles/Globals.css"
 
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ isLoggedIn, isUser }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+
 
     return (
         <div>
@@ -26,6 +27,7 @@ export default function Header({ isLoggedIn }) {
                     <Nav className="mr-auto" navbar>
                         { /* When isLoggedIn === true, we will render the Home link */}
                         {isLoggedIn &&
+
                             <NavItem>
                                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
                             </NavItem>
@@ -42,10 +44,10 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/UserProfile">UserProfile</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
+                                    <NavLink tag={RRNavLink} to="/triviaGames">Trivia Games</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/triviaGames">Trivia Games</NavLink>
+                                    <NavLink tag={RRNavLink} to="/TriviaGame/GetByUserId">My Games</NavLink>
                                 </NavItem>
                             </>
                         }

@@ -1,1 +1,11 @@
-.catContainer {}
+.catContainer {
+    display: flex;
+}
+
+.catButton {
+    margin-left: 5rem;
+}
+
+#cat-cardBody {
+    display: flex;
+}

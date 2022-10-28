@@ -13,7 +13,7 @@ const Category = ({ cat }) => {
                     <div className="catNameContainer">
                         <span className="catName">{cat.name}</span>
                     </div>
-                    <button className="btn btn-warning" onClick={() => { navigate(`/GetByCategory/${cat.id}`) }}>
+                    <button className="catButton" onClick={() => { navigate(`/GetByCategory/${cat.id}`) }}>
                         View Games
                     </button>
                 </section>
