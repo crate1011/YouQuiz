@@ -1,19 +1,25 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Security.Claims;
 using YouQuiz.Models;
 using YouQuiz.Repositories;
+using YouQuiz.Utils;
 
 namespace YouQuiz.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class TriviaGameController : ControllerBase
     {
         private readonly ITriviaGameRepository _trivRepository;
-        public TriviaGameController(ITriviaGameRepository trivRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public TriviaGameController(ITriviaGameRepository trivRepository, IUserProfileRepository userProfileRepository)
         {
             _trivRepository = trivRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
@@ -70,6 +76,21 @@ namespace YouQuiz.Controllers
         {
             _trivRepository.AddTriviaGameCategory(triviaGameCategory);
             return CreatedAtAction("Get", new { id = triviaGameCategory.Id }, triviaGameCategory);
+        }
+
+        [Authorize]
+        [HttpGet("GetByUserId")]
+        public IActionResult GetByUserId()
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var userId = currentUserProfile.Id;
+            return Ok(_trivRepository.GetByUserId(userId));
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }

@@ -1,4 +1,7 @@
+import firebase from "firebase/app";
+import { getToken } from "./authManager";
 const baseUrl = "/api/UserProfile";
+
 
 export const getAllUserProfiles = () => {
     return fetch(baseUrl).then((res) => res.json());
@@ -19,3 +22,20 @@ export const addUserProfile = (userProfile) => {
     });
 };
 
+export const getCurrentUserByFirebaseId = () => {
+    return getToken()?.then((token) => {
+        const uid = firebase?.auth()?.currentUser.uid;
+        return fetch(`${baseUrl}/${uid}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return Error("An unknown error occured");
+            }
+        });
+    });
+};
