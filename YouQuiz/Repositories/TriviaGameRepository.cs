@@ -12,10 +12,9 @@ namespace YouQuiz.Repositories
 {
     public class TriviaGameRepository : BaseRepository, ITriviaGameRepository
     {
-        private readonly string _connectionString;
         public TriviaGameRepository(IConfiguration configuration) : base(configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+           
         }
 
         public List<TriviaGame> GetAllTriviaGames()
@@ -26,7 +25,7 @@ namespace YouQuiz.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    SELECT tg.Id, tg.Name, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName
+                    SELECT tg.Id, tg.Name, tg.UserProfileId, tg.ImageUrl, c.Id AS CategoryId, c.Name AS CategoryName
                     FROM TriviaGame tg 
                     LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
                     LEFT JOIN Category c ON tgc.CategoryId = c.Id
@@ -46,6 +45,7 @@ namespace YouQuiz.Repositories
                                 existingTriviaGame = new TriviaGame()
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
                                     UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                                     Categories = new List<Category>()
@@ -79,12 +79,13 @@ namespace YouQuiz.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO TriviaGame ( Name, UserProfileId )
+                        INSERT INTO TriviaGame ( Name, UserProfileId, ImageUrl )
                         OUTPUT INSERTED.ID
-                        VALUES ( @Name, @UserProfileId )";
+                        VALUES ( @Name, @UserProfileId, @ImageUrl )";
 
                     cmd.Parameters.AddWithValue("@Name", triviaGame.Name);
                     cmd.Parameters.AddWithValue("@UserProfileId", triviaGame.UserProfileId);
+                    cmd.Parameters.AddWithValue("@ImageUrl", triviaGame.ImageUrl);
 
                     triviaGame.Id = (int)cmd.ExecuteScalar();
 
@@ -107,7 +108,7 @@ namespace YouQuiz.Repositories
                         cmd.Parameters.AddWithValue("@CategoryId", triviaGameCategory.CategoryId);
                         cmd.Parameters.AddWithValue("@TriviaGameId", triviaGameCategory.TriviaGameId);
 
-                        triviaGameCategory.Id = (int)cmd.ExecuteScalar();
+                    triviaGameCategory.Id = (int)cmd.ExecuteScalar();
                     }
                 }
         }
@@ -137,11 +138,13 @@ namespace YouQuiz.Repositories
                     cmd.CommandText = @"
                         UPDATE TriviaGame
                            SET Name = @Name,
-                               UserProfileId = @UserProfileId
+                               UserProfileId = @UserProfileId,
+                               ImageUrl = @ImageUrl
                          WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Name", triviaGame.Name);
                     DbUtils.AddParameter(cmd, "@UserProfileId", triviaGame.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", triviaGame.ImageUrl);
                     DbUtils.AddParameter(cmd, "@Id", triviaGame.Id);
 
                     cmd.ExecuteNonQuery();
@@ -157,11 +160,11 @@ namespace YouQuiz.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT tg.Id, tg.Name, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName
-                    FROM TriviaGame tg 
-                    LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
-                    LEFT JOIN Category c ON tgc.CategoryId = c.Id
-                         WHERE tg.Id = @id";
+                        SELECT tg.Id, tg.Name, tg.UserProfileId, tg.ImageUrl, c.Id AS CategoryId, c.Name AS CategoryName
+                        FROM TriviaGame tg 
+                        LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
+                        LEFT JOIN Category c ON tgc.CategoryId = c.Id
+                        WHERE tg.Id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", Id);
 
@@ -174,6 +177,7 @@ namespace YouQuiz.Repositories
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             Categories = new List<Category>()
                         };
@@ -203,7 +207,7 @@ namespace YouQuiz.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT tg.Id, tg.Name, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName, tgc.CategoryId AS tgcId
+                        SELECT tg.Id, tg.Name, tg.UserProfileId, tg.ImageUrl, c.Id AS CategoryId, c.Name AS CategoryName, tgc.CategoryId AS tgcId
                         FROM TriviaGame tg 
                         LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
                         LEFT JOIN Category c ON tgc.CategoryId = c.Id
@@ -226,6 +230,7 @@ namespace YouQuiz.Repositories
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                                     UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                                     Categories = new List<Category>()
                                 };
@@ -257,7 +262,7 @@ namespace YouQuiz.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT tg.Id, tg.Name, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName
+                       SELECT tg.Id, tg.Name, tg.ImageUrl, tg.UserProfileId, c.Id AS CategoryId, c.Name AS CategoryName
                        FROM TriviaGame tg 
                        LEFT JOIN TriviaGameCategory tgc ON tgc.TriviaGameId = tg.Id
                        LEFT JOIN Category c ON tgc.CategoryId = c.Id
@@ -280,6 +285,7 @@ namespace YouQuiz.Repositories
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                                     UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                                     Categories = new List<Category>()
                                 };

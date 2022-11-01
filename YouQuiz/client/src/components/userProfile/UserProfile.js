@@ -11,8 +11,13 @@ const UserProfile = ({ userProfile }) => {
         <Card>
             <p>PROFILE INFO</p>
             <CardBody>
+                <img
+                    alt="Sample"
+                    src={userProfile.imageUrl}
+                />
                 <p><b>Name: </b>{userProfile.name}</p>
                 <p><b>Email: </b>{userProfile.email}</p>
+
                 <button className="btn btn-warning" onClick={() => { navigate(`/UserProfile/${userProfile.id}`) }}>
                     DETAILS
                 </button>

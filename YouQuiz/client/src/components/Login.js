@@ -19,7 +19,11 @@ export default function Login() {
 
     return (
         <Form className="LoginPanel" onSubmit={loginSubmit}>
-
+            <div>
+                <img className="youImage"
+                    alt="Sample"
+                    src={"YouQuiz-1.png"} />
+            </div>
             <fieldset>
                 <FormGroup>
                     <Input

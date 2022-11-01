@@ -10,6 +10,7 @@ export const TriviaGameCreate = () => {
     const [triviaGame, setTriviaGame] = useState({
         name: "",
         userProfileId: "",
+        imageUrl: "",
         categoryId: 0
     })
 
@@ -25,6 +26,7 @@ export const TriviaGameCreate = () => {
         const triviaGameToSendToApi = {
             name: triviaGame.name,
             userProfileId: triviaGame.userProfileId,
+            imageUrl: triviaGame.imageUrl,
             categoryId: triviaGame.categoryId
         }
         addTriviaGame(triviaGameToSendToApi).then(() => { navigate(`/triviaGames`) })
@@ -33,12 +35,11 @@ export const TriviaGameCreate = () => {
     return (
         <>
             <Form>
-                <div>Create A Game</div>
-                <img alt="" src="" width=""></img>
                 <FormGroup>
-
+                    <Label for="exampleEmail">
+                        Trivia Game Name
+                    </Label>
                     <div children="form-description">
-                        <label htmlFor="name">Trivia Game Name:</label>
                         <input type="name"
                             className="form-control"
                             onChange={
@@ -49,14 +50,34 @@ export const TriviaGameCreate = () => {
                                 }
                             } />
                     </div>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="examplePassword">
+                        Image Url
+                    </Label>
                     <div children="form-description">
-                        <label htmlFor="userProfile">UserProfileId:</label>
                         <input type="name"
                             className="form-control"
                             onChange={
                                 (evt) => {
                                     let copy = { ...triviaGame }
-                                    copy.userProfileId = parseInt(evt.target.value)
+                                    copy.imageUrl = evt.target.value
+                                    setTriviaGame(copy)
+                                }
+                            } />
+                    </div>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="examplePassword">
+                        User Profile Id
+                    </Label>
+                    <div children="form-description">
+                        <input type="name"
+                            className="form-control"
+                            onChange={
+                                (evt) => {
+                                    let copy = { ...triviaGame }
+                                    copy.userProfileId = evt.target.value
                                     setTriviaGame(copy)
                                 }
                             } />
@@ -83,7 +104,6 @@ export const TriviaGameCreate = () => {
                 </FormGroup>
                 <button onClick={handleCreateButtonClick}
                     className="saveButton">Save Game</button>
-
             </Form>
         </>
     )

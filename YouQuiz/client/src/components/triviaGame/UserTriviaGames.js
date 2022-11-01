@@ -28,7 +28,7 @@ const UserTriviaGames = () => {
                 </NavItem>
                 {
                     userTriviaGames.map((usertriviaGame) => (
-                        <UserTriviaGame usertriviaGame={usertriviaGame} userTriviaGameName={usertriviaGame.name} userTriviaGameId={usertriviaGame.id} key={usertriviaGame.id} update={getTrivia} />
+                        <UserTriviaGame usertriviaGame={usertriviaGame} userTriviaGameName={usertriviaGame.name} userTriviaGameId={usertriviaGame.id} userTriviaGameImage={usertriviaGame.imageUrl} key={usertriviaGame.id} update={getTrivia} />
                     ))}
             </div>
         </div>

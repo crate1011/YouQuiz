@@ -1,22 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardBody } from "reactstrap";
+import { Button, Card, CardBody, CardTitle } from "reactstrap";
 import "./category.css"
 
 const Category = ({ cat }) => {
     const navigate = useNavigate()
 
     return (
-        <Card>
-            <CardBody id="cat-cardBody">
-                <section className="catContainer">
-                    <div className="catNameContainer">
-                        <span className="catName">{cat.name}</span>
-                    </div>
-                    <button className="catButton" onClick={() => { navigate(`/GetByCategory/${cat.id}`) }}>
-                        View Games
-                    </button>
-                </section>
+        <Card
+            style={{
+                width: '18rem'
+            }}
+        >
+            <CardBody>
+                <CardTitle tag="h5" className="catTitle">
+                    {cat.name}
+                </CardTitle>
+
+                <Button className="catButton" onClick={() => { navigate(`/GetByCategory/${cat.id}`) }}>
+                    View Games
+                </Button>
             </CardBody>
         </Card>
     )

@@ -21,7 +21,7 @@ export default function Header({ isLoggedIn, isUser }) {
     return (
         <div>
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">YouQuiz</NavbarBrand>
+                <NavbarBrand>YouQuiz</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -29,25 +29,28 @@ export default function Header({ isLoggedIn, isUser }) {
                         {isLoggedIn &&
 
                             <NavItem>
-                                <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                                <NavLink tag={RRNavLink} to="/"><img className="youImageTwo"
+                                    src={"YouQuiz-1.png"} /></NavLink>
                             </NavItem>
                         }
                     </Nav>
                     <Nav navbar>
                         {isLoggedIn &&
                             <>
-                                <NavItem>
-                                    <a aria-current="page" className="nav-link"
-                                        style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/UserProfile">UserProfile</NavLink>
-                                </NavItem>
+
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/triviaGames">Trivia Games</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/TriviaGame/GetByUserId">My Games</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/UserProfile">UserProfile</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <a aria-current="page" className="nav-link"
+                                        style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                                 </NavItem>
                             </>
                         }

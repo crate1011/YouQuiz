@@ -10,6 +10,7 @@ export const TriviaGameEdit = () => {
 
     const [triviaGame, setTriviaGame] = useState({
         name: "",
+        imageUrl: "",
         userProfileId: 0
     })
 
@@ -30,6 +31,7 @@ export const TriviaGameEdit = () => {
         const gameToSendToApi = {
             id: triviaGame.id,
             name: triviaGame.name,
+            imageUrl: triviaGame.imageUrl,
             userProfileId: triviaGame.userProfileId
         }
 
@@ -55,6 +57,21 @@ export const TriviaGameEdit = () => {
                                     (evt) => {
                                         let copy = { ...triviaGame }
                                         copy.name = evt.target.value
+                                        setTriviaGame(copy)
+                                    }
+                                } />
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div children="form-description">
+                            <label htmlFor="name">Image Url:</label>
+                            <input type="name"
+                                className="form-control"
+                                value={triviaGame.imageUrl}
+                                onChange={
+                                    (evt) => {
+                                        let copy = { ...triviaGame }
+                                        copy.imageUrl = evt.target.value
                                         setTriviaGame(copy)
                                     }
                                 } />

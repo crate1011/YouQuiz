@@ -1,5 +1,6 @@
 .catContainer {
     display: flex;
+
 }
 
 .catButton {
@@ -8,4 +9,9 @@
 
 #cat-cardBody {
     display: flex;
+}
+
+.catTitle {
+    display: flex;
+    justify-content: center;
 }

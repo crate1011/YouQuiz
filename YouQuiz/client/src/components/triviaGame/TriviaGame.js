@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardBody } from "reactstrap";
+import { Button, Card, CardBody, CardTitle } from "reactstrap";
 import "./triviaGame.css"
 
 const TriviaGame = ({ triviaGame }) => {
@@ -8,18 +8,23 @@ const TriviaGame = ({ triviaGame }) => {
     const navigate = useNavigate()
 
     return (
-        <Card>
-            <CardBody id="triv-cardBody">
-                <section className="trivContainer">
-                    <div className="trivNameContainer">
-                        <span className="tagName">{triviaGame.name}</span>
-                    </div>
-                    <div className="buttonContainer">
-                    </div>
-                </section>
-                <button className="trivButton" onClick={() => { navigate(`/TriviaGame/${triviaGame.id}`) }}>
+        <Card
+            style={{
+                width: '18rem'
+            }}
+        >
+            <img
+                alt="Sample"
+                src={triviaGame.imageUrl}
+            />
+            <CardBody>
+                <CardTitle tag="h5">
+                    {triviaGame?.name}
+                </CardTitle>
+
+                <Button className="btn btn-warning" onClick={() => { navigate(`/TriviaGame/${triviaGame.id}`) }}>
                     DETAILS
-                </button>
+                </Button>
             </CardBody>
         </Card>
     )

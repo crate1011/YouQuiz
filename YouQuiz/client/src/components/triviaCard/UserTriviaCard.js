@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { deleteTriviaCard } from "../../modules/TriviaCardManager";
 
 
-const TriviaCard = ({ triviaCard, update }) => {
+const UserTriviaCard = ({ triviaCard, update }) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const navigate = useNavigate()
@@ -36,10 +36,36 @@ const TriviaCard = ({ triviaCard, update }) => {
                     <div className="trivNameContainer">
                         <span className="tagName">Correct Answer: {triviaCard.answer}</span>
                     </div>
+                    <div className="buttonContainer">
+                        <button className="btn btn-warning" onClick={() => { navigate(`/TriviaCard/GetByTriviaGame/${triviaCard.id}`) }}>
+                            edit
+                        </button>
+                        <button outline onClick={toggle}
+                            className="deleteButton">DELETE</button>
+                    </div>
                 </section>
+                <Modal isOpen={modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>Delete Card</ModalHeader>
+                    <ModalBody>
+                        <>
+                            <section className="quickView">
+                                <img alt="" src="" width="" height=""></img>
+                                <div>Are You Sure You Want To Delete: {triviaCard.name}</div>
+                            </section>
+                        </>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={toggle}>
+                            Cancel
+                        </Button>
+                        <Button color="secondary" onClick={() => { deleteButton(triviaCard.id) }} >
+                            Confirm
+                        </Button>
+                    </ModalFooter>
+                </Modal>
             </CardBody>
         </Card>
     )
 }
 
-export default TriviaCard;
+export default UserTriviaCard;

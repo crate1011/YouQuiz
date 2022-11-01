@@ -24,7 +24,6 @@ export default function UserViews({ isLoggedIn, isUser }) {
                 <Route path="/">
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
-                    <Route path="userProfile" element={<UserProfileList />} />
                     <Route path="categories" element={<CategoriesList />}></Route >
                     <Route path="triviaGames" element={<TriviaGameList />}></Route >
                     <Route path="userProfile/:userProfileId" element={<UserProfileDetails />} />

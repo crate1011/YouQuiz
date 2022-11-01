@@ -16,6 +16,8 @@ import { TriviaCardEdit } from "./triviaCard/TriviaCardEdit";
 import { TriviaGameEdit } from "./triviaGame/TriviaGameEdit";
 import { CategoryCreate } from "./category/CategoryCreate";
 import UserTriviaGame from "./triviaGame/UserTriviaGames";
+import UserTriviaGameDetails from "./triviaGame/UserTriviaGameDetails";
+import UserTriviaCardList from "./triviaCard/UserTriviaCardList";
 
 export default function AdminViews({ isLoggedIn, isUser }) {
     return (
@@ -28,7 +30,6 @@ export default function AdminViews({ isLoggedIn, isUser }) {
                     <Route path="categories" element={<CategoriesList />}></Route >
                     <Route path="triviaGames" element={<TriviaGameList />}></Route >
                     <Route path="userProfile/:userProfileId" element={<UserProfileDetails />} />
-                    <Route path="triviaGame/:triviaGameId" element={<> <TriviaGameDetails /> <TriviaCardList /> </>} />
                     <Route path="GetByCategory/:GameId" element={<TriviaGameByCategory />} />
                     <Route path="/TriviaGame/CreateTrivia" element={<TriviaGameCreate />} />
                     <Route path="/TriviaCard/CreateTriviaCard" element={<CreateTriviaCard />} />
@@ -36,6 +37,9 @@ export default function AdminViews({ isLoggedIn, isUser }) {
                     <Route path="/TriviaGame/Edit/:triviaGameId" element={<TriviaGameEdit />} />
                     <Route path="/TriviaGame/AddTriviaGameCategory/:triviaGameId" element={<CategoryCreate />} />
                     <Route path="/TriviaGame/GetByUserId" element={<UserTriviaGame />} isUser={isUser} />
+                    <Route path="triviaGame/:triviaGameId" element={<> <TriviaGameDetails /> <TriviaCardList /> </>} />
+                    <Route path="UserTriviaGame/:UserTriviaGameId" element={<> <UserTriviaGameDetails /> <UserTriviaCardList /> </>} />
+
                     <Route index element={<><TriviaGameCreate /> <CategoriesList /> </>} />
 
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />

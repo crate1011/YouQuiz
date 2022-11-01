@@ -24,7 +24,7 @@ export const CreateTriviaCard = () => {
             Answer: triviaCard.Answer,
             TriviaGameId: triviaCard.TriviaGameId
         }
-        addTriviaCard(cardToSendToApi).then(() => { navigate(`/TriviaGame/${triviaCard.TriviaGameId}`) })
+        addTriviaCard(cardToSendToApi).then(() => { navigate(`/UserTriviaGame/${triviaCard.TriviaGameId}`) })
     }
 
     return (
