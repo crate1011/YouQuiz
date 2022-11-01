@@ -9,3 +9,48 @@
 .trivyButton {
     background-color: rgba(251, 202, 8, 0.969);
 }
+
+.youQuizForm {
+    border-color: black;
+    width: 50rem;
+
+    display: flex;
+    justify-content: center;
+}
+
+.underHeader {
+    margin: 2em;
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+.title {
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+.YourTag {
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+.YourButton {
+    margin-left: 3rem;
+}
+
+.YourContainer {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+.triviaContainer {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+}

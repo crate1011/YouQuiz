@@ -22,10 +22,9 @@ const TriviaGameList = () => {
     return (
         <div className="triviaContainer">
             <div className="row justify-content-center">
-                <NavItem className="addTagContainer">
-                    <div className="addTagContainer">Create A New Game</div>
-                    <Button id="createButton" tag={RRNavLink} to="/TriviaGame/CreateTrivia">Create Game</Button>
-                </NavItem>
+                <div className="title">
+                    ALL TRIVIA GAMES
+                </div>
                 {triviaGames.map((triviaGame) => (
                     <TriviaGame triviaGame={triviaGame} key={triviaGame.id} update={getTrivia} />
                 ))}

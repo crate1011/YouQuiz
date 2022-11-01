@@ -7,7 +7,7 @@ const Category = ({ cat }) => {
     const navigate = useNavigate()
 
     return (
-        <Card
+        <Card className="CatCard"
             style={{
                 width: '18rem'
             }}

@@ -3,7 +3,7 @@ import { Button, NavItem } from "reactstrap";
 import { getByUserId } from "../../modules/triviaGameManager";
 import { NavLink as RRNavLink } from "react-router-dom";
 import UserTriviaGame from "./UserTriviaGame";
-
+import "./triviaGame.css"
 
 const UserTriviaGames = () => {
     const [userTriviaGames, setTriviaGame] = useState([]);
@@ -20,11 +20,11 @@ const UserTriviaGames = () => {
     }, []);
 
     return (
-        <div className="container">
+        <div className="YourContainer">
             <div className="row justify-content-center">
-                <NavItem className="addTagContainer">
-                    <div className="addTagContainer">Create A New Game</div>
-                    <Button id="createButton" tag={RRNavLink} to="/TriviaGame/CreateTrivia">Create Game</Button>
+                <NavItem className="YourTag">
+                    YOUR TRIVIA GAMES
+                    <Button className="YourButton" tag={RRNavLink} to="/TriviaGame/CreateTrivia">Create Game</Button>
                 </NavItem>
                 {
                     userTriviaGames.map((usertriviaGame) => (

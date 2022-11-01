@@ -5,7 +5,7 @@ import { ApplicationViews } from './components/ApplicationViews';
 import Header from "./components/Header";
 import { onLoginStatusChange } from "./modules/authManager";
 import { getCurrentUserByFirebaseId } from './modules/UserProfileManager';
-
+import "./App.css"
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);

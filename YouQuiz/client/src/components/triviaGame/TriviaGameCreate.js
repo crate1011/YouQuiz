@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Form, FormGroup, Input, Label } from "reactstrap"
 import { addTriviaGame } from "../../modules/triviaGameManager"
 import { getAllCategories } from "../../modules/catManager"
+import "./triviaGame.css"
 
 export const TriviaGameCreate = () => {
     const navigate = useNavigate()
@@ -33,8 +34,9 @@ export const TriviaGameCreate = () => {
     }
 
     return (
-        <>
-            <Form>
+        <div className="underHeader">
+            <Form className="youQuizForm">
+                CREATE A GAME!
                 <FormGroup>
                     <Label for="exampleEmail">
                         Trivia Game Name
@@ -105,6 +107,6 @@ export const TriviaGameCreate = () => {
                 <button onClick={handleCreateButtonClick}
                     className="saveButton">Save Game</button>
             </Form>
-        </>
+        </div>
     )
 }
