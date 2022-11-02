@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Form, FormGroup } from "reactstrap"
 import { addTriviaCard } from "../../modules/TriviaCardManager"
 
 export const CreateTriviaCard = () => {
+    const { UserTriviaGameId } = useParams();
     const navigate = useNavigate()
     const [triviaCard, update] = useState({
         Question: "",
@@ -22,30 +23,15 @@ export const CreateTriviaCard = () => {
             WrongAnswerTwo: triviaCard.WrongAnswerTwo,
             WrongAnswerThree: triviaCard.WrongAnswerThree,
             Answer: triviaCard.Answer,
-            TriviaGameId: triviaCard.TriviaGameId
+            TriviaGameId: UserTriviaGameId
         }
-        addTriviaCard(cardToSendToApi).then(() => { navigate(`/UserTriviaGame/${triviaCard.TriviaGameId}`) })
+        addTriviaCard(cardToSendToApi).then(() => { navigate(`/UserTriviaGame/${UserTriviaGameId}`) })
     }
 
     return (
         <>
             <Form>
-                <img alt="" src="" width=""></img>
                 <FormGroup>
-                    <fieldset>
-                        <div children="form-description">
-                            <label htmlFor="name">Trivia Game Id:</label>
-                            <input type="name"
-                                className="form-control"
-                                onChange={
-                                    (evt) => {
-                                        let copy = { ...triviaCard }
-                                        copy.TriviaGameId = evt.target.value
-                                        update(copy)
-                                    }
-                                } />
-                        </div>
-                    </fieldset>
                     <fieldset>
                         <div children="form-description">
                             <label htmlFor="name">Question:</label>

@@ -41,7 +41,7 @@ export const TriviaCardEdit = () => {
         }
         return editTriviaCard(triviaCard.id, cardToSendToApi)
             .then(() => {
-                navigate(`/TriviaGame/${triviaCard.triviaGameId}`)
+                navigate(`/TriviaGame/GetByUserId`)
             })
     }
 

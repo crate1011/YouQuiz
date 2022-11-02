@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, CardBody, NavItem } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import { getTriviaGameById } from "../../modules/triviaGameManager";
-import { NavLink as RRNavLink } from "react-router-dom";
 
 const TriviaGameDetails = () => {
     const { triviaGameId } = useParams();

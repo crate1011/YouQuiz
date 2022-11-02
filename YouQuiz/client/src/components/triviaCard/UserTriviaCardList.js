@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetByTriviaGame } from "../../modules/TriviaCardManager";
-import TriviaCard from "./TriviaCard";
 import UserTriviaCard from "./UserTriviaCard";
 
 

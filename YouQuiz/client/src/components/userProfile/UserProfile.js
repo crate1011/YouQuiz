@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
+import "./userProfile.css"
 
 
 const UserProfile = ({ userProfile }) => {
@@ -11,8 +12,7 @@ const UserProfile = ({ userProfile }) => {
         <Card>
             <p>PROFILE INFO</p>
             <CardBody>
-                <img
-                    alt="Sample"
+                <img className="userImage"
                     src={userProfile.imageUrl}
                 />
                 <p><b>Name: </b>{userProfile.name}</p>

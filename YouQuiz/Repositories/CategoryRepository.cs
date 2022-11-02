@@ -24,7 +24,7 @@ namespace YouQuiz.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, Name FROM Category ORDER BY Name ASC";
+                    cmd.CommandText = "SELECT Id, Name, ImageUrl FROM Category ORDER BY Name ASC";
                     var reader = cmd.ExecuteReader();
                     List<Category> cat = new List<Category>();
 
@@ -34,6 +34,8 @@ namespace YouQuiz.Repositories
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
+                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+
                         });
                     }
 

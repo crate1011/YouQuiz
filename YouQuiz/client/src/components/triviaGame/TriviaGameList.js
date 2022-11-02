@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, NavItem } from "reactstrap";
 import { getAllTriviaGames } from "../../modules/triviaGameManager";
 import TriviaGame from "./TriviaGame";
-import { NavLink as RRNavLink } from "react-router-dom";
 import "./triviaGame.css"
 
 const TriviaGameList = () => {
