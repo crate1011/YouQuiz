@@ -12,6 +12,9 @@ const Category = ({ cat }) => {
                 width: '18rem'
             }}
         >
+            <img
+                src={cat.imageUrl}
+            />
             <CardBody>
                 <CardTitle tag="h5" className="catTitle">
                     {cat.name}

@@ -19,7 +19,7 @@ import UserTriviaGame from "./triviaGame/UserTriviaGames";
 import UserTriviaGameDetails from "./triviaGame/UserTriviaGameDetails";
 import UserTriviaCardList from "./triviaCard/UserTriviaCardList";
 
-export default function AdminViews({ isLoggedIn, isUser }) {
+export default function AdminViews({ isUser }) {
     return (
         <main>
             <Routes>
@@ -32,7 +32,7 @@ export default function AdminViews({ isLoggedIn, isUser }) {
                     <Route path="userProfile/:userProfileId" element={<UserProfileDetails />} />
                     <Route path="GetByCategory/:GameId" element={<TriviaGameByCategory />} />
                     <Route path="/TriviaGame/CreateTrivia" element={<TriviaGameCreate />} />
-                    <Route path="/TriviaCard/CreateTriviaCard" element={<CreateTriviaCard />} />
+                    <Route path="/TriviaCard/CreateTriviaCard/:UserTriviaGameId" element={<CreateTriviaCard />} />
                     <Route path="/TriviaCard/GetByTriviaGame/:triviaCardId" element={<TriviaCardEdit />} />
                     <Route path="/TriviaGame/Edit/:triviaGameId" element={<TriviaGameEdit />} />
                     <Route path="/TriviaGame/AddTriviaGameCategory/:triviaGameId" element={<CategoryCreate />} />

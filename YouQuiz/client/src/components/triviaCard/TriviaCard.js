@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import { useNavigate } from "react-router-dom"
 import { deleteTriviaCard } from "../../modules/TriviaCardManager";
 

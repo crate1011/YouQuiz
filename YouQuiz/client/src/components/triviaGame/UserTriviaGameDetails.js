@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, CardBody, NavItem } from "reactstrap";
+import { Card, CardBody, NavItem } from "reactstrap";
 import { getTriviaGameById } from "../../modules/triviaGameManager";
-import { NavLink as RRNavLink } from "react-router-dom";
 
 const UserTriviaGameDetails = () => {
     const { UserTriviaGameId } = useParams();
@@ -30,13 +29,14 @@ const UserTriviaGameDetails = () => {
                         <p>Name: {gameDetail.name}</p>
                         <p>UserProfileId: {gameDetail.userProfileId}</p>
                         <p>Id: {gameDetail.id}</p>
-
                     </div>
                 </div>
             </CardBody>
             <NavItem className="addcardContainer">
                 <div className="addcarContainer">Create New Trivia Card</div>
-                <Button id="createButton" tag={RRNavLink} to="/TriviaCard/CreateTriviaCard">Create Trivia Card</Button>
+                <button className="Cat" onClick={() => { navigate(`/TriviaCard/CreateTriviaCard/${UserTriviaGameId}`) }}>
+                    Create Card
+                </button>
             </NavItem>
             <button className="addCat" onClick={() => { navigate(`/TriviaGame/AddTriviaGameCategory/${UserTriviaGameId}`) }}>
                 Add Category
